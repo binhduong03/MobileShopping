@@ -5,14 +5,9 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +37,7 @@ public class DienThoaiActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     Handler handler = new Handler();
     boolean isLoading = false;
+    boolean isLastPage = false; // ✅ Thêm biến này để ngăn load khi hết dữ liệu
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,43 +54,29 @@ public class DienThoaiActivity extends AppCompatActivity {
     private void addEventLoad() {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
-            @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if(isLoading == false){
-                    if (!isLoading && linearLayoutManager.findLastVisibleItemPosition() == sanPhamMoiList.size() - 1) {
-                        isLoading = true;
-                        loadMore();
-                    }
-
+                if (!isLoading && !isLastPage &&
+                        linearLayoutManager.findLastVisibleItemPosition() == sanPhamMoiList.size() - 1) {
+                    loadMore();
+                    isLoading = true;
                 }
             }
         });
     }
 
     private void loadMore() {
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                sanPhamMoiList.add(null);
-                adapterDt.notifyItemInserted(sanPhamMoiList.size()-1);
-            }
+        handler.post(() -> {
+            sanPhamMoiList.add(null);
+            adapterDt.notifyItemInserted(sanPhamMoiList.size() - 1);
         });
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                sanPhamMoiList.remove(sanPhamMoiList.size()-1);
-                adapterDt.notifyItemRemoved(sanPhamMoiList.size());
-                page = page + 1;
-                getData(page);
-                adapterDt.notifyDataSetChanged();
-                isLoading = false;
-            }
-        }, 2000);
+
+        handler.postDelayed(() -> {
+            sanPhamMoiList.remove(sanPhamMoiList.size() - 1);
+            adapterDt.notifyItemRemoved(sanPhamMoiList.size());
+            page++;
+            getData(page);
+        }, 1500);
     }
 
     private void getData(int page) {
@@ -102,50 +84,46 @@ public class DienThoaiActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                      sanPhamMoiModel -> {
-                            if (sanPhamMoiModel.isSuccess()){
+                        sanPhamMoiModel -> {
+                            if (sanPhamMoiModel.isSuccess()) {
                                 List<SanPhamMoi> result = sanPhamMoiModel.getResult();
 
-
+                                // Nếu không có thêm dữ liệu => đánh dấu là trang cuối
                                 if (result.size() == 0) {
-                                    isLoading = true;
+                                    isLastPage = true;
                                     return;
                                 }
 
-                                if (adapterDt == null){
+                                if (adapterDt == null) {
                                     sanPhamMoiList = result;
                                     adapterDt = new DienThoaiAdapter(getApplicationContext(), sanPhamMoiList);
                                     recyclerView.setAdapter(adapterDt);
                                 } else {
-                                    int vitri = sanPhamMoiList.size() - 1;
-                                    int soluongadd = result.size();
+                                    int vitri = sanPhamMoiList.size();
                                     sanPhamMoiList.addAll(result);
-                                    adapterDt.notifyItemRangeInserted(vitri, soluongadd);
+                                    adapterDt.notifyItemRangeInserted(vitri, result.size());
                                 }
+
+                                isLoading = false;
                             }
-                      },
+                        },
                         throwable -> {
-                            Toast.makeText(this, "Khong ket noi đc server: ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Không kết nối được server", Toast.LENGTH_SHORT).show();
+                            isLoading = false;
                         }
                 ));
-
     }
 
     private void ActionToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void AnhXa() {
         toolbar = findViewById(R.id.toobar);
         recyclerView = findViewById(R.id.recyclerview_dt);
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         sanPhamMoiList = new ArrayList<>();
