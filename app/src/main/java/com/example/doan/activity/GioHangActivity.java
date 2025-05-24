@@ -78,6 +78,14 @@ public class GioHangActivity extends AppCompatActivity {
             adapter = new GioHangAdapter(getApplicationContext(), Utils.manggiohang);
             recycleViewgiohang.setAdapter(adapter);
         }
+
+        btnmuahang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ThanhToanActivity.class);
+                startActivity(intent);
+            }
+        }
         long tongtien = 0;
         for(int i = 0; i < Utils.manggiohang.size(); i++){
             tongtien += Utils.manggiohang.get(i).getGiasp();
