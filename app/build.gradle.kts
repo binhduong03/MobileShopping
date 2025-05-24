@@ -57,4 +57,6 @@ dependencies {
     //bradge
     implementation ("com.nex3z:notification-badge:1.0.4")
 
+    //event bus
+    implementation ("org.greenrobot:eventbus:3.3.1")
 }
