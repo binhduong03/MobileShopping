@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Dòng trên của dấu "=" -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M2,8h20v2H2z" />
+
+    <!-- Dòng dưới của dấu "=" -->
+    <path
+        android:fillColor="#FF0000"
+        android:pathData="M2,14h20v2H2z" />
+</vector>

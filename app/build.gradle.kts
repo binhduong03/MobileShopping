@@ -61,4 +61,6 @@ dependencies {
     //paper
     implementation ("io.github.pilgr:paperdb:2.7.1")
 
+    //event bus
+    implementation ("org.greenrobot:eventbus:3.3.1")
 }
