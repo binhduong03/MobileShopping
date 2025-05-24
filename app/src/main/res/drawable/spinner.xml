@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Nền hơi trắng trong -->
+    <solid android:color="#0FFFFFFF" />
+
+    <!-- Bo tròn góc lớn hơn một chút -->
+    <corners android:radius="8dp" />
+
+    <!-- Viền màu cam đỏ -->
+    <stroke
+        android:width="2dp"
+        android:color="#FF5722" />
+
+    <!-- Bóng đổ nhẹ giả lập (áp dụng nếu nền không trong suốt) -->
+    <padding
+        android:top="2dp"
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp" />
+</shape>
