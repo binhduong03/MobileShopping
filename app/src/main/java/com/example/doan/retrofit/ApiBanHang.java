@@ -48,7 +48,8 @@ public interface ApiBanHang {
             @Field("email") String email,
             @Field("pass") String pass,
             @Field("username") String username,
-            @Field("phone") String phone
+            @Field("phone") String phone,
+            @Field("uid") String uid
     );
 
     @POST("dangnhap.php")
@@ -64,6 +65,13 @@ public interface ApiBanHang {
             @Field("email") String email
     );
 
+    //Quản lý sản phẩm
+    @POST("Admin/SanPham/delete_sp.php")
+    @FormUrlEncoded
+    Observable<MessageModel> deleteSp(
+            @Field("sanphammoi_id") int sanphammoi_id
+    );
+
     @POST("Admin/SanPham/insert_sp.php")
     @FormUrlEncoded
     Observable<MessageModel> insertSp(
@@ -72,6 +80,25 @@ public interface ApiBanHang {
             @Field("hinhanh") String hinhanh,
             @Field("mota") String mota,
             @Field("loai") int loai
+    );
+
+    @POST("Admin/SanPham/update_sp.php")
+    @FormUrlEncoded
+    Observable<MessageModel> updateSp(
+            @Field("sanphammoi_id") int sanphammoi_id,
+            @Field("tensp") String tensp,
+            @Field("giasp") String giasp,
+            @Field("hinhanh") String hinhanh,
+            @Field("mota") String mota,
+            @Field("loai") int loai
+    );
+
+    @POST("updatetoken.php")
+    @FormUrlEncoded
+    Observable<MessageModel> updateToken(
+            @Field("user_id") int user_id,
+            @Field("token") String token
+
     );
 
     @Multipart

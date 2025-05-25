@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
@@ -20,6 +21,11 @@ import com.example.doan.R;
 import com.example.doan.retrofit.ApiBanHang;
 import com.example.doan.retrofit.RetrofitClient;
 import com.example.doan.utils.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -29,6 +35,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class DangNhapActivity extends AppCompatActivity {
     TextView txtdangki, txtresetpass;
     EditText email, pass;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
     AppCompatButton btndangnhap;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -70,7 +78,26 @@ public class DangNhapActivity extends AppCompatActivity {
                     //save
                     Paper.book().write("email", str_email);
                     Paper.book().write("pass", str_pass);
-                    dangNhap(str_email, str_pass);
+                    if (user != null) {
+                        // user đã có đăng nhập firebase
+                        dangNhap(str_email, str_pass);
+                    }else {
+                        // user đã đăng xuất
+                        firebaseAuth.signInWithEmailAndPassword(str_email, str_pass)
+                                .addOnCompleteListener(DangNhapActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            dangNhap(str_email, str_pass);
+                                        }
+                                    }
+                                });
+
+                    }
+
+
+
+
                 }
             }
         });
@@ -84,7 +111,8 @@ public class DangNhapActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
         btndangnhap = findViewById(R.id.btndangnhap);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        user = firebaseAuth.getCurrentUser();
         //đọc dữ liệu
         if(Paper.book().read("email") != null && Paper.book().read("pass") != null){
             email.setText(Paper.book().read("email"));
