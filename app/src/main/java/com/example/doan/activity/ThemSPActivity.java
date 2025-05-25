@@ -19,10 +19,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan.R;
+import com.example.doan.adapter.SanPhamMoiAdapter;
 import com.example.doan.databinding.ActivityThemspBinding;
 import com.example.doan.model.MessageModel;
+import com.example.doan.model.SanPhamMoi;
 import com.example.doan.retrofit.ApiBanHang;
 import com.example.doan.retrofit.RetrofitClient;
 import com.example.doan.utils.Utils;
@@ -49,6 +52,8 @@ public class ThemSPActivity extends AppCompatActivity {
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     String mediaPath;
+    SanPhamMoi sanPhamSua;
+    boolean flag =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +61,27 @@ public class ThemSPActivity extends AppCompatActivity {
         binding = ActivityThemspBinding.inflate(getLayoutInflater());
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
         setContentView(binding.getRoot());
-
         initView();
         initData();
+
+        Intent intent = getIntent();
+        sanPhamSua = (SanPhamMoi) intent.getSerializableExtra("sua");
+
+        if(sanPhamSua == null){
+            //them moi
+            flag = false;
+        } else {
+            flag = true;
+            binding.bntthem.setText("Sửa sản phẩm");
+            //hiện thị dữ liệu
+            binding.tensp.setText(sanPhamSua.getTensp());
+            binding.giasp.setText(sanPhamSua.getGiasp());
+            binding.mota.setText(sanPhamSua.getMota());
+            binding.hinhanh.setText(sanPhamSua.getHinhanh());
+            binding.spinnerLoai.setSelection(sanPhamSua.getLoai());
+        }
+
+
     }
 
     private void initData() {
@@ -81,8 +104,12 @@ public class ThemSPActivity extends AppCompatActivity {
         });
         binding.bntthem.setOnClickListener(new View.OnClickListener() {
            @Override
-           public void onClick(View v) {
-               themsanpham();
+           public void onClick(View view) {
+               if (flag == false) {
+                   themsanpham();
+               } else {
+                   suaSanPham();
+               }
            }
         });
 
@@ -97,6 +124,36 @@ public class ThemSPActivity extends AppCompatActivity {
                         .start();
             }
         });
+    }
+
+    private void suaSanPham() {
+        String str_tensp = binding.tensp.getText().toString();
+        String str_giasp = binding.giasp.getText().toString();
+        String str_hinhanh = binding.hinhanh.getText().toString();
+        String str_mota = binding.mota.getText().toString();
+
+        if (TextUtils.isEmpty(str_tensp) || TextUtils.isEmpty(str_giasp) || TextUtils.isEmpty(str_hinhanh) || TextUtils.isEmpty(str_mota) || loai==0){
+            Toast.makeText(getApplicationContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_LONG).show();
+        } else {
+            compositeDisposable.add(apiBanHang.updateSp(sanPhamSua.getSanphammoi_id(),str_tensp, str_giasp, str_hinhanh, str_mota, loai)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            messageModel -> {
+                                if (messageModel.isSuccess()){
+                                    Toast.makeText(getApplicationContext(), messageModel.getMessage(), Toast.LENGTH_LONG).show();
+                                    finish();
+
+                                } else {
+                                    Toast.makeText(getApplicationContext(), messageModel.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            },
+                            throwable -> {
+                                Toast.makeText(getApplicationContext(), throwable.getMessage() , Toast.LENGTH_LONG).show();
+                            }
+                    ));
+
+        }
     }
 
     @Override
