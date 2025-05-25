@@ -29,6 +29,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures{
+        viewBinding = true
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -60,7 +64,14 @@ dependencies {
     implementation ("org.greenrobot:eventbus:3.2.0")
     //paper
     implementation ("io.github.pilgr:paperdb:2.7.1")
+    //Gson
+    implementation ("com.google.code.gson:gson:2.8.9")
+    //lottie
+    implementation ("com.airbnb.android:lottie:4.2.2")
+    //neumorphism
+    implementation ("com.github.fornewid:neumorphism:0.3.2")
+    //image pick
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
 
-    //event bus
-    implementation ("org.greenrobot:eventbus:3.3.1")
+
 }

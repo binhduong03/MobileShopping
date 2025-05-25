@@ -32,6 +32,7 @@ import com.example.doan.adapter.SanPhamMoiAdapter;
 import com.example.doan.model.LoaiSp;
 import com.example.doan.model.SanPhamMoi;
 import com.example.doan.model.SanPhamMoiModel;
+import com.example.doan.model.User;
 import com.example.doan.retrofit.ApiBanHang;
 import com.example.doan.retrofit.RetrofitClient;
 import com.example.doan.utils.GridSpacingItemDecoration;
@@ -42,6 +43,7 @@ import com.nex3z.notificationbadge.NotificationBadge;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -70,7 +72,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+        Paper.init(this);
+        if(Paper.book().read("user") != null){
+            User user = Paper.book().read("user");
+            Utils.user_current.setEmail(user.getEmail());
+            Utils.user_current.setPass(user.getPass());
 
+        }
         Anhxa();
         ActionBar();
         ActionViewFlipper();
@@ -102,6 +110,18 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         Intent laptop = new Intent(getApplicationContext(), LaptopActivity.class);
                         startActivity(laptop);
+                        break;
+                    case 5:
+                        // xóa key user
+                        Paper.book().delete("user");
+                        Intent dangnhap = new Intent(getApplicationContext(), DangNhapActivity.class);
+                        startActivity(dangnhap);
+                        finish();
+                        break;
+                    case 6:
+
+                        Intent quanly = new Intent(getApplicationContext(), QuanLiActivity.class);
+                        startActivity(quanly);
                         break;
 
                 }
@@ -136,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                         loaiSpModel -> {
                             if (loaiSpModel.isSuccess()){
                                 mangloaisp = loaiSpModel.getResult();
+                                mangloaisp.add(new LoaiSp("","Quản lý"));
                                 loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(),mangloaisp);
                                 listViewManHinhChinh.setAdapter(loaiSpAdapter);
                             }

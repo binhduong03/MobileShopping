@@ -18,6 +18,7 @@ import com.example.doan.Interface.ItemClickListener;
 import com.example.doan.R;
 import com.example.doan.activity.ChiTietActivity;
 import com.example.doan.model.SanPhamMoi;
+import com.example.doan.utils.Utils;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -55,7 +56,12 @@ public class DienThoaiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             myViewHolder.giasp.setText("Giá: " + decimalFormat.format(Double.parseDouble(sanPham.getGiasp())) + "đ");
             myViewHolder.mota.setText(sanPham.getMota());
             myViewHolder.idsp.setText(sanPham.getSanphammoi_id() + "");
-            Glide.with(context).load(sanPham.getHinhanh()).into(myViewHolder.hinhanh);
+            if (sanPham.getHinhanh().contains("http")){
+                Glide.with(context).load(sanPham.getHinhanh()).into(myViewHolder.hinhanh);
+            }else {
+                String hinh = Utils.BASE_URL+"Admin/images/"+sanPham.getHinhanh();
+                Glide.with(context).load(hinh).into(myViewHolder.hinhanh);
+            }
             myViewHolder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View view, int pos, boolean isLongClick) {

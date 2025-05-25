@@ -5,6 +5,12 @@ public class LoaiSp {
     String tensanpham;
     String hinhanh;
 
+    public LoaiSp( String hinhanh, String tensanpham) {
+
+        this.hinhanh = hinhanh;
+        this.tensanpham = tensanpham;
+    }
+
     public int getSanpham_id() {
         return sanpham_id;
     }
@@ -28,4 +34,5 @@ public class LoaiSp {
     public void setHinhanh(String hinhanh) {
         this.hinhanh = hinhanh;
     }
+
 }

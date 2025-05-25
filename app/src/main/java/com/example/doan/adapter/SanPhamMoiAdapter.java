@@ -16,6 +16,7 @@ import com.example.doan.Interface.ItemClickListener;
 import com.example.doan.R;
 import com.example.doan.activity.ChiTietActivity;
 import com.example.doan.model.SanPhamMoi;
+import com.example.doan.utils.Utils;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -53,7 +54,13 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
             holder.txtgia.setText("Giá: Không hợp lệ");
             e.printStackTrace(); // log lỗi để bạn dễ debug
         }
-        Glide.with(context).load(sanPhamMoi.getHinhanh()).into(holder.imghinhanh);
+        if (sanPhamMoi.getHinhanh().contains("http")){
+            Glide.with(context).load(sanPhamMoi.getHinhanh()).into(holder.imghinhanh);
+        }else {
+            String hinh = Utils.BASE_URL+"Admin/images/"+sanPhamMoi.getHinhanh();
+            Glide.with(context).load(hinh).into(holder.imghinhanh);
+        }
+
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int pos, boolean isLongClick) {
