@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
     FrameLayout frameLayout;
 
+    ImageView imgSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -236,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Anhxa() {
+        imgSearch = findViewById(R.id.imgSearch);
         toolbar = findViewById(R.id.toobarmanhinhchinh);
         viewFlipper = findViewById(R.id.viewlipper);
         recyclerViewManHinhChinh = findViewById(R.id.recyclerview);
@@ -270,6 +273,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent giohang = new Intent(getApplicationContext(), GioHangActivity.class);
                 startActivity(giohang);
+            }
+        });
+
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent);
             }
         });
     }
