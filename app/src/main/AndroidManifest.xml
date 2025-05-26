@@ -23,13 +23,13 @@
             android:name=".activity.ThanhToanActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.GioHangActivity"
+            android:name=".activity.ThemSPActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ResetPassActivity"
+            android:name=".activity.QuanLiActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.DangNhapActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +37,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.GioHangActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ResetPassActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.DangNhapActivity"
+            android:exported="true"/>
+
         <activity
             android:name=".activity.DangKiActivity"
             android:exported="true" />

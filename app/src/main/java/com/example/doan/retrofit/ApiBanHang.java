@@ -4,14 +4,20 @@ package com.example.doan.retrofit;
 
 import com.example.doan.model.DonHangModel;
 import com.example.doan.model.LoaiSpModel;
+import com.example.doan.model.MessageModel;
 import com.example.doan.model.SanPhamMoiModel;
 import com.example.doan.model.UserModel;
 
 import io.reactivex.rxjava3.core.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface ApiBanHang {
     //GET DATA
@@ -43,7 +49,8 @@ public interface ApiBanHang {
             @Field("email") String email,
             @Field("pass") String pass,
             @Field("username") String username,
-            @Field("phone") String phone
+            @Field("phone") String phone,
+            @Field("uid") String uid
     );
 
     @POST("dangnhap.php")
@@ -76,4 +83,44 @@ public interface ApiBanHang {
     Observable<DonHangModel> xemDonHang(
             @Field("user_id") int user_id
     );
+
+    //Quản lý sản phẩm
+    @POST("Admin/SanPham/delete_sp.php")
+    @FormUrlEncoded
+    Observable<MessageModel> deleteSp(
+            @Field("sanphammoi_id") int sanphammoi_id
+    );
+
+    @POST("Admin/SanPham/insert_sp.php")
+    @FormUrlEncoded
+    Observable<MessageModel> insertSp(
+            @Field("tensp") String tensp,
+            @Field("giasp") String giasp,
+            @Field("hinhanh") String hinhanh,
+            @Field("mota") String mota,
+            @Field("loai") int loai
+    );
+
+    @POST("Admin/SanPham/update_sp.php")
+    @FormUrlEncoded
+    Observable<MessageModel> updateSp(
+            @Field("sanphammoi_id") int sanphammoi_id,
+            @Field("tensp") String tensp,
+            @Field("giasp") String giasp,
+            @Field("hinhanh") String hinhanh,
+            @Field("mota") String mota,
+            @Field("loai") int loai
+    );
+
+    @POST("updatetoken.php")
+    @FormUrlEncoded
+    Observable<MessageModel> updateToken(
+            @Field("user_id") int user_id,
+            @Field("token") String token
+
+    );
+
+    @Multipart
+    @POST("Admin/SanPham//upload.php")
+    Call<MessageModel> uploadFile(@Part MultipartBody.Part file);
 }

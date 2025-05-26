@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -32,16 +33,21 @@ import com.example.doan.adapter.SanPhamMoiAdapter;
 import com.example.doan.model.LoaiSp;
 import com.example.doan.model.SanPhamMoi;
 import com.example.doan.model.SanPhamMoiModel;
+import com.example.doan.model.User;
 import com.example.doan.retrofit.ApiBanHang;
 import com.example.doan.retrofit.RetrofitClient;
 import com.example.doan.utils.GridSpacingItemDecoration;
 import com.example.doan.utils.Utils;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -70,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
+        Paper.init(this);
+        if(Paper.book().read("user") != null){
+            User user = Paper.book().read("user");
+            Utils.user_current = user;
+        }
+
+        getToken();
 
         Anhxa();
         ActionBar();
@@ -83,6 +96,29 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "khong co internet, vui lòng kết nối", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void getToken(){
+        FirebaseMessaging.getInstance().getToken()
+                .addOnSuccessListener(new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String s) {
+                        if (!TextUtils.isEmpty(s)){
+                            compositeDisposable.add(apiBanHang.updateToken(Utils.user_current.getUser_id(),s)
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(
+                                            messageModel -> {
+
+                                            },
+                                            throwable -> {
+                                                Toast.makeText(getApplicationContext(), "Lỗi: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                    ));
+                        }
+                    }
+                });
+
     }
 
     private void getEventClick() {
@@ -106,6 +142,19 @@ public class MainActivity extends AppCompatActivity {
                     case 5:
                         Intent donhang = new Intent(getApplicationContext(), XemDonActivity.class);
                         startActivity(donhang);
+                        break;
+                    case 6:
+                        // xóa key user
+                        Paper.book().delete("user");
+                        FirebaseAuth.getInstance().signOut();
+                        Intent dangnhap = new Intent(getApplicationContext(), DangNhapActivity.class);
+                        startActivity(dangnhap);
+                        finish();
+                        break;
+                    case 7:
+
+                        Intent quanly = new Intent(getApplicationContext(), QuanLiActivity.class);
+                        startActivity(quanly);
                         break;
 
                 }
@@ -140,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
                         loaiSpModel -> {
                             if (loaiSpModel.isSuccess()){
                                 mangloaisp = loaiSpModel.getResult();
+                                mangloaisp.add(new LoaiSp("","Quản lý"));
                                 loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(),mangloaisp);
                                 listViewManHinhChinh.setAdapter(loaiSpAdapter);
                             }
