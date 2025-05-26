@@ -86,6 +86,12 @@ public interface ApiBanHang {
             @Field("user_id") int user_id
     );
 
+    @POST("timkiem.php")
+    @FormUrlEncoded
+    Observable<SanPhamMoiModel> search(
+            @Field("search") String search
+    );
+
     //Quản lý sản phẩm
     @POST("Admin/SanPham/delete_sp.php")
     @FormUrlEncoded
