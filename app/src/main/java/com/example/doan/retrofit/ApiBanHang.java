@@ -2,6 +2,7 @@ package com.example.doan.retrofit;
 
 
 
+import com.example.doan.model.DonHangModel;
 import com.example.doan.model.LoaiSpModel;
 import com.example.doan.model.MessageModel;
 import com.example.doan.model.SanPhamMoiModel;
@@ -63,6 +64,24 @@ public interface ApiBanHang {
     @FormUrlEncoded
     Observable<UserModel> resetPass(
             @Field("email") String email
+    );
+
+    @POST("donhang.php")
+    @FormUrlEncoded
+    Observable<UserModel> createOder(
+            @Field("email") String email,
+            @Field("sdt") String sdt,
+            @Field("tongtien") String tongtien,
+            @Field("user_id") int user_id,
+            @Field("diachi") String diachi,
+            @Field("soluong") int soluong,
+            @Field("chitiet") String chitiet
+    );
+
+    @POST("xemdonhang.php")
+    @FormUrlEncoded
+    Observable<DonHangModel> xemDonHang(
+            @Field("user_id") int user_id
     );
 
     //Quản lý sản phẩm

@@ -140,6 +140,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(laptop);
                         break;
                     case 5:
+                        Intent donhang = new Intent(getApplicationContext(), XemDonActivity.class);
+                        startActivity(donhang);
+                        break;
+                    case 6:
                         // xóa key user
                         Paper.book().delete("user");
                         FirebaseAuth.getInstance().signOut();
@@ -147,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(dangnhap);
                         finish();
                         break;
-                    case 6:
+                    case 7:
 
                         Intent quanly = new Intent(getApplicationContext(), QuanLiActivity.class);
                         startActivity(quanly);

@@ -3,6 +3,7 @@ package com.example.doan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -40,6 +41,8 @@ public class DangNhapActivity extends AppCompatActivity {
     AppCompatButton btndangnhap;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    boolean isLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
