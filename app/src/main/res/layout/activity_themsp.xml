@@ -5,7 +5,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="activity.ThemSPActivity">
+    tools:context=".activity.Admin.ThemSPActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         app:title="Thêm sản phẩm"

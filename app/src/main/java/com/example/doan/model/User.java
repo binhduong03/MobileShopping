@@ -7,6 +7,15 @@ public class User {
     String username;
     String phone;
     String uid;
+    int role;
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
+    }
 
     public String getUid() {
         return uid;

@@ -1,8 +1,7 @@
-package com.example.doan.activity;
+package com.example.doan.activity.Pages;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan.R;
-import com.example.doan.adapter.DienThoaiAdapter;
+import com.example.doan.adapter.LaptopAdapter;
 import com.example.doan.model.SanPhamMoi;
 import com.example.doan.retrofit.ApiBanHang;
 import com.example.doan.retrofit.RetrofitClient;
@@ -25,26 +24,26 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class DienThoaiActivity extends AppCompatActivity {
+public class LaptopActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     int page = 1;
     int loai;
-    DienThoaiAdapter adapterDt;
+    LaptopAdapter adapterLt;
     List<SanPhamMoi> sanPhamMoiList;
     LinearLayoutManager linearLayoutManager;
     Handler handler = new Handler();
     boolean isLoading = false;
-    boolean isLastPage = false; // ✅ Thêm biến này để ngăn load khi hết dữ liệu
+    boolean isLastPage = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dien_thoai);
+        setContentView(R.layout.activity_laptop);
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
-        loai = getIntent().getIntExtra("loai", 1);
+        loai = getIntent().getIntExtra("loai", 2);
         AnhXa();
         ActionToolBar();
         getData(page);
@@ -68,40 +67,38 @@ public class DienThoaiActivity extends AppCompatActivity {
     private void loadMore() {
         handler.post(() -> {
             sanPhamMoiList.add(null);
-            adapterDt.notifyItemInserted(sanPhamMoiList.size() - 1);
+            adapterLt.notifyItemInserted(sanPhamMoiList.size() - 1);
         });
 
         handler.postDelayed(() -> {
             sanPhamMoiList.remove(sanPhamMoiList.size() - 1);
-            adapterDt.notifyItemRemoved(sanPhamMoiList.size());
+            adapterLt.notifyItemRemoved(sanPhamMoiList.size());
             page++;
             getData(page);
         }, 1500);
     }
 
     private void getData(int page) {
-        compositeDisposable.add(apiBanHang.getDienThoai(page, loai)
+        compositeDisposable.add(apiBanHang.getLapTop(page, loai)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         sanPhamMoiModel -> {
                             if (sanPhamMoiModel.isSuccess()) {
                                 List<SanPhamMoi> result = sanPhamMoiModel.getResult();
-
-                                // Nếu không có thêm dữ liệu => đánh dấu là trang cuối
                                 if (result.size() == 0) {
                                     isLastPage = true;
                                     return;
                                 }
 
-                                if (adapterDt == null) {
+                                if (adapterLt == null) {
                                     sanPhamMoiList = result;
-                                    adapterDt = new DienThoaiAdapter(getApplicationContext(), sanPhamMoiList);
-                                    recyclerView.setAdapter(adapterDt);
+                                    adapterLt = new LaptopAdapter(getApplicationContext(), sanPhamMoiList);
+                                    recyclerView.setAdapter(adapterLt);
                                 } else {
                                     int vitri = sanPhamMoiList.size();
                                     sanPhamMoiList.addAll(result);
-                                    adapterDt.notifyItemRangeInserted(vitri, result.size());
+                                    adapterLt.notifyItemRangeInserted(vitri, result.size());
                                 }
 
                                 isLoading = false;
@@ -114,6 +111,7 @@ public class DienThoaiActivity extends AppCompatActivity {
                 ));
     }
 
+
     private void ActionToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -122,8 +120,8 @@ public class DienThoaiActivity extends AppCompatActivity {
 
     private void AnhXa() {
         toolbar = findViewById(R.id.toobar);
-        recyclerView = findViewById(R.id.recyclerview_dt);
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView = findViewById(R.id.recyclerview_lt);
+        linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
         sanPhamMoiList = new ArrayList<>();

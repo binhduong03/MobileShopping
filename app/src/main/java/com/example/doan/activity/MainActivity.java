@@ -1,10 +1,13 @@
 package com.example.doan.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,9 +21,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -28,11 +32,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.doan.R;
+import com.example.doan.activity.Admin.QuanLiActivity;
+import com.example.doan.activity.Pages.DienThoaiActivity;
+import com.example.doan.activity.Pages.GioHangActivity;
+import com.example.doan.activity.Pages.LaptopActivity;
+import com.example.doan.activity.Pages.XemDonActivity;
 import com.example.doan.adapter.LoaiSpAdapter;
 import com.example.doan.adapter.SanPhamMoiAdapter;
 import com.example.doan.model.LoaiSp;
 import com.example.doan.model.SanPhamMoi;
-import com.example.doan.model.SanPhamMoiModel;
 import com.example.doan.model.User;
 import com.example.doan.retrofit.ApiBanHang;
 import com.example.doan.retrofit.RetrofitClient;
@@ -70,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
     NotificationBadge badge;
 
     FrameLayout frameLayout;
+    private static final int REQUEST_CODE_POST_NOTIFICATIONS = 1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +104,33 @@ public class MainActivity extends AppCompatActivity {
             getEventClick();
         } else {
             Toast.makeText(getApplicationContext(), "khong co internet, vui lòng kết nối", Toast.LENGTH_LONG).show();
+        }
+        checkNotificationPermission();
+    }
+
+    private void checkNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                // Chưa cấp quyền, yêu cầu cấp quyền runtime
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS},
+                        REQUEST_CODE_POST_NOTIFICATIONS);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions,
+                                           int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_POST_NOTIFICATIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Quyền thông báo đã được cấp", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Ứng dụng cần quyền thông báo để hoạt động tốt", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -152,7 +188,6 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         break;
                     case 7:
-
                         Intent quanly = new Intent(getApplicationContext(), QuanLiActivity.class);
                         startActivity(quanly);
                         break;
@@ -189,8 +224,15 @@ public class MainActivity extends AppCompatActivity {
                         loaiSpModel -> {
                             if (loaiSpModel.isSuccess()){
                                 mangloaisp = loaiSpModel.getResult();
-                                mangloaisp.add(new LoaiSp("","Quản lý"));
-                                loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(),mangloaisp);
+                                if (Utils.user_current.getRole() != 1){
+                                    for (int i = 0; i < mangloaisp.size(); i++) {
+                                        if (mangloaisp.get(i).getTensanpham().equalsIgnoreCase("Quản lý")) {
+                                            mangloaisp.remove(i);
+                                            break;
+                                        }
+                                    }
+                                }
+                                loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(), mangloaisp);
                                 listViewManHinhChinh.setAdapter(loaiSpAdapter);
                             }
                         },

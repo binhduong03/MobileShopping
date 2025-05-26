@@ -6,11 +6,11 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.QuanLiActivity">
+    tools:context=".activity.Admin.QuanLiActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toobar"
-        app:title="Điện thoại"
+        app:title="Quản lý sản phẩm"
         android:background="#B2B4C1"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"

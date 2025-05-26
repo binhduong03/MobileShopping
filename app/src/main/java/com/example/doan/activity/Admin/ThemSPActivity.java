@@ -1,4 +1,4 @@
-package com.example.doan.activity;
+package com.example.doan.activity.Admin;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,16 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan.R;
-import com.example.doan.adapter.SanPhamMoiAdapter;
 import com.example.doan.databinding.ActivityThemspBinding;
 import com.example.doan.model.MessageModel;
 import com.example.doan.model.SanPhamMoi;

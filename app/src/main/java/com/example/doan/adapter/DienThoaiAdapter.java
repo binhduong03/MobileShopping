@@ -2,7 +2,6 @@ package com.example.doan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.doan.Interface.ItemClickListener;
 import com.example.doan.R;
-import com.example.doan.activity.ChiTietActivity;
+import com.example.doan.activity.Pages.ChiTietActivity;
 import com.example.doan.model.SanPhamMoi;
 import com.example.doan.utils.Utils;
 

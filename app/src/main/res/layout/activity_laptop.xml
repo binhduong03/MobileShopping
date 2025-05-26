@@ -5,7 +5,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.LaptopActivity">
+    tools:context=".activity.Pages.LaptopActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toobar"
         app:title="Laptop"

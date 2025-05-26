@@ -50,7 +50,9 @@ public interface ApiBanHang {
             @Field("pass") String pass,
             @Field("username") String username,
             @Field("phone") String phone,
-            @Field("uid") String uid
+            @Field("uid") String uid,
+            @Field("role") int role
+
     );
 
     @POST("dangnhap.php")
