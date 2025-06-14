@@ -57,6 +57,8 @@ dependencies {
     implementation ("com.google.android.libraries.identity.googleid:googleid:1.1.1")
     implementation ("com.google.firebase:firebase-messaging:24.1.1")
 
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
     //glider
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")

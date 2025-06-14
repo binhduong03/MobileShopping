@@ -6,8 +6,26 @@ public class User {
     String pass;
     String username;
     String phone;
+    String address;
+    String avatar;
     String uid;
     int role;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public int getRole() {
         return role;

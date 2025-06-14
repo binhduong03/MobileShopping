@@ -36,6 +36,9 @@ import com.example.doan.activity.Admin.QuanLiActivity;
 import com.example.doan.activity.Pages.DienThoaiActivity;
 import com.example.doan.activity.Pages.GioHangActivity;
 import com.example.doan.activity.Pages.LaptopActivity;
+import com.example.doan.activity.Pages.LienHeActivity;
+import com.example.doan.activity.Pages.SearchActivity;
+import com.example.doan.activity.Pages.TrangCaNhanActivity;
 import com.example.doan.activity.Pages.XemDonActivity;
 import com.example.doan.adapter.LoaiSpAdapter;
 import com.example.doan.adapter.SanPhamMoiAdapter;
@@ -176,6 +179,14 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         Intent laptop = new Intent(getApplicationContext(), LaptopActivity.class);
                         startActivity(laptop);
+                        break;
+                    case 3:
+                        Intent thongtincanhan = new Intent(getApplicationContext(), TrangCaNhanActivity.class);
+                        startActivity(thongtincanhan);
+                        break;
+                    case 4:
+                        Intent lienhe = new Intent(getApplicationContext(), LienHeActivity.class);
+                        startActivity(lienhe);
                         break;
                     case 5:
                         Intent donhang = new Intent(getApplicationContext(), XemDonActivity.class);

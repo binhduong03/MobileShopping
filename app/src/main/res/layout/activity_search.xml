@@ -5,7 +5,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SearchActivity">
+    tools:context=".activity.Pages.SearchActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
