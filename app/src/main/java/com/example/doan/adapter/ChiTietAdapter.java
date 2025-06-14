@@ -14,6 +14,7 @@ import android.util.Log;
 import com.bumptech.glide.Glide;
 import com.example.doan.R;
 import com.example.doan.model.Item;
+import com.example.doan.utils.Utils;
 
 import java.util.List;
 
@@ -46,7 +47,13 @@ public class ChiTietAdapter extends RecyclerView.Adapter<ChiTietAdapter.MyViewHo
         holder.txtTenspchitiet.setText(item.getTensanpham() + "");
         holder.txtSoluongchitiet.setText("Số lượng: " + item.getSoluong());
         Log.d("ChiTietAdapter", "Tên sản phẩm: " + itemList.get(position).getTensanpham());
-        Glide.with(context).load(item.getHinhanh()).into(holder.imageChitiet);
+        if (item.getHinhanh().contains("http")){
+            Glide.with(context).load(item.getHinhanh()).into(holder.imageChitiet);
+        } else {
+            String hinh = Utils.BASE_URL+"Admin/images/"+item.getHinhanh();
+            Glide.with(context).load(hinh).into(holder.imageChitiet);
+        }
+
     }
 
     @Override

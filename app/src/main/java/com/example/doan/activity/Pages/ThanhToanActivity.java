@@ -1,4 +1,4 @@
-package com.example.doan.activity;
+package com.example.doan.activity.Pages;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,15 +9,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.doan.R;
+import com.example.doan.activity.MainActivity;
 import com.example.doan.retrofit.ApiBanHang;
 import com.example.doan.retrofit.RetrofitClient;
 import com.example.doan.utils.Utils;
@@ -26,7 +23,6 @@ import com.google.gson.Gson;
 import java.text.DecimalFormat;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 

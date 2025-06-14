@@ -78,7 +78,7 @@ public class DangKiActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = firebaseAuth.getCurrentUser();
                                     if (user != null) {
-                                        postData(str_email, str_pass, str_username, str_phone, user.getUid());
+                                        postData(str_email, str_pass, str_username, str_phone, user.getUid(),0);
                                     }
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Email đã tồn tại hoặc không thành công", Toast.LENGTH_SHORT).show();
@@ -92,8 +92,8 @@ public class DangKiActivity extends AppCompatActivity {
         }
     }
 
-    private void postData(String str_email, String str_pass, String str_username, String str_phone, String uid){
-        compositeDisposable.add(apiBanHang.dangKi(str_email, str_pass, str_username, str_phone, uid)
+    private void postData(String str_email, String str_pass, String str_username, String str_phone, String uid, int role){
+        compositeDisposable.add(apiBanHang.dangKi(str_email, str_pass, str_username, str_phone, uid, role)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
