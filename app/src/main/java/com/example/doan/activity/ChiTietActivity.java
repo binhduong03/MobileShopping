@@ -24,7 +24,7 @@ import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.text.DecimalFormat;
 
-public class ChiTietActivity extends AppCompatActivity {
+public class ChiTietActivity extends BaseActivity {
     TextView tensp, giasp, mota;
     Button btnthem;
     ImageView imghinhanh;
@@ -36,7 +36,7 @@ public class ChiTietActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chi_tiet);
+        setContentLayout(R.layout.activity_chi_tiet);
         initView();
         ActionToolBar();
         initData();
@@ -59,13 +59,12 @@ public class ChiTietActivity extends AppCompatActivity {
             for (int i = 0; i < Utils.manggiohang.size(); i++) {
                 if (Utils.manggiohang.get(i).getIdsp() == sanPhamMoi.getSanphammoi_id()) {
                     Utils.manggiohang.get(i).setSoluong(soluong + Utils.manggiohang.get(i).getSoluong());
-                    long gia = Long.parseLong(sanPhamMoi.getGiasp()) * Utils.manggiohang.get(i).getSoluong();
-                    Utils.manggiohang.get(i).setGiasp(gia);
+
                     flag = true;
                 }
             }
             if (flag == false) {
-                long gia = Long.parseLong(sanPhamMoi.getGiasp()) * soluong;
+                long gia = Long.parseLong(sanPhamMoi.getGiasp());
                 GioHang giohang = new GioHang();
                 giohang.setGiasp(gia);
                 giohang.setSoluong(soluong);
@@ -76,7 +75,7 @@ public class ChiTietActivity extends AppCompatActivity {
             }
         } else {
             int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
-            long gia = Long.parseLong(sanPhamMoi.getGiasp()) * soluong;
+            long gia = Long.parseLong(sanPhamMoi.getGiasp());
             GioHang giohang = new GioHang();
             giohang.setGiasp(gia);
             giohang.setSoluong(soluong);

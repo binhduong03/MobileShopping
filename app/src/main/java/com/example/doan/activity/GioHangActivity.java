@@ -29,7 +29,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class GioHangActivity extends AppCompatActivity {
+public class GioHangActivity extends BaseActivity {
     TextView giohangtrong, tongtien;
     Toolbar toolbar;
     RecyclerView recycleViewgiohang;
@@ -45,7 +45,7 @@ public class GioHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_gio_hang);
+        setContentLayout(R.layout.activity_gio_hang);
         initView();
         initControl();
         tinhTongtien();

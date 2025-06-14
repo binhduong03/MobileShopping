@@ -23,7 +23,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class XemDonActivity extends AppCompatActivity {
+public class XemDonActivity extends BaseActivity {
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     ApiBanHang apiBanHang;
     RecyclerView reDonhang;
@@ -33,7 +33,7 @@ public class XemDonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_xem_don);
+        setContentLayout(R.layout.activity_xem_don);
         initView();
         initToolbar();
         getOrder();
