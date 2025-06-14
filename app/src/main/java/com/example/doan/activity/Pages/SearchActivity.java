@@ -10,14 +10,20 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan.R;
 import com.example.doan.adapter.DienThoaiAdapter;
+import com.example.doan.adapter.SanPhamMoiAdapter;
 import com.example.doan.model.SanPhamMoi;
 import com.example.doan.retrofit.ApiBanHang;
 import com.example.doan.retrofit.RetrofitClient;
+import com.example.doan.utils.GridSpacingItemDecoration;
 import com.example.doan.utils.Utils;
 
 import java.util.ArrayList;
@@ -27,12 +33,12 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends BaseActivity {
 
     Toolbar toolbar;
     RecyclerView recyclerView;
     EditText editSearch;
-    DienThoaiAdapter adapterDt;
+    SanPhamMoiAdapter adapterDt;
     List<SanPhamMoi> sanPhamMoiList;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -41,7 +47,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_search);
+        setContentLayout(R.layout.activity_search);
         initView();
         ActionToolBar();
 
@@ -53,9 +59,14 @@ public class SearchActivity extends AppCompatActivity {
         editSearch = findViewById(R.id.editSearch);
         toolbar = findViewById(R.id.toolbar);
         recyclerView = findViewById(R.id.recyclerview_search);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+
+        int spacingInPixels = 16;
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, spacingInPixels, true));
+
         editSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -66,7 +77,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if(charSequence.length() == 0){
                     sanPhamMoiList.clear();
-                    adapterDt = new DienThoaiAdapter(getApplicationContext(), sanPhamMoiList);
+                    adapterDt = new SanPhamMoiAdapter(getApplicationContext(), sanPhamMoiList);
                     recyclerView.setAdapter(adapterDt);
                 }else{
                     getDataSearch(charSequence.toString());
@@ -90,8 +101,12 @@ public class SearchActivity extends AppCompatActivity {
                         sanPhamMoiModel -> {
                             if(sanPhamMoiModel.isSuccess()){
                                 sanPhamMoiList = sanPhamMoiModel.getResult();
-                                adapterDt = new DienThoaiAdapter(getApplicationContext(), sanPhamMoiList);
+                                adapterDt = new SanPhamMoiAdapter(getApplicationContext(), sanPhamMoiList);
                                 recyclerView.setAdapter(adapterDt);
+                            }else{
+                                Toast.makeText(getApplicationContext(), sanPhamMoiModel.getMessage(), Toast.LENGTH_SHORT).show();
+                                sanPhamMoiList.clear();
+                                adapterDt.notifyDataSetChanged();
                             }
                         },
                         throwable -> {
@@ -99,6 +114,7 @@ public class SearchActivity extends AppCompatActivity {
                         }
                 ));
     }
+
     private void ActionToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

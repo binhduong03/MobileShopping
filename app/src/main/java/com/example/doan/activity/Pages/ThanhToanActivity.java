@@ -26,7 +26,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class ThanhToanActivity extends AppCompatActivity {
+public class ThanhToanActivity extends BaseActivity {
     Toolbar toolbar;
     TextView txtTongtien, txtPhone, txtEmail;
     EditText edtdiachi;
@@ -41,7 +41,7 @@ public class ThanhToanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thanh_toan);
+        setContentLayout(R.layout.activity_thanh_toan);
         initView();
         countItem();
         initControl();
