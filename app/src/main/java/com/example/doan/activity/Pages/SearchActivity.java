@@ -1,4 +1,4 @@
-package com.example.doan.activity;
+package com.example.doan.activity.Pages;
 
 import android.os.Bundle;
 import android.text.Editable;

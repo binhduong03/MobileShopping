@@ -1,4 +1,4 @@
-package com.example.doan.activity;
+package com.example.doan.activity.Admin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,14 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan.R;
@@ -35,7 +30,6 @@ import java.util.List;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import soup.neumorphism.NeumorphCardView;
 
 public class QuanLiActivity extends AppCompatActivity {
     ImageView img_them;

@@ -1,22 +1,16 @@
-package com.example.doan.activity;
+package com.example.doan.activity.Pages;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan.R;
-import com.example.doan.adapter.DienThoaiAdapter;
 import com.example.doan.adapter.LaptopAdapter;
 import com.example.doan.model.SanPhamMoi;
 import com.example.doan.retrofit.ApiBanHang;

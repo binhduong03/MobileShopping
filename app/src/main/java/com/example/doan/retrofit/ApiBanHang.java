@@ -50,7 +50,9 @@ public interface ApiBanHang {
             @Field("pass") String pass,
             @Field("username") String username,
             @Field("phone") String phone,
-            @Field("uid") String uid
+            @Field("uid") String uid,
+            @Field("role") int role
+
     );
 
     @POST("dangnhap.php")
@@ -127,6 +129,16 @@ public interface ApiBanHang {
     );
 
     @Multipart
-    @POST("Admin/SanPham//upload.php")
+    @POST("Admin/SanPham/upload.php")
     Call<MessageModel> uploadFile(@Part MultipartBody.Part file);
+
+
+    @POST("LienHe/insert_lh.php")
+    @FormUrlEncoded
+    Observable<MessageModel> insertLH(
+            @Field("user_id") int user_id,
+            @Field("message") String message,
+            @Field("is_read") int is_read
+    );
+
 }

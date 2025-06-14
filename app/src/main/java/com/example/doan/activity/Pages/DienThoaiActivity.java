@@ -1,8 +1,7 @@
-package com.example.doan.activity;
+package com.example.doan.activity.Pages;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
