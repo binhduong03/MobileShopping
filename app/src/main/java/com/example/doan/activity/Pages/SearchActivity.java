@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan.R;
+import com.example.doan.activity.BaseActivity;
 import com.example.doan.adapter.DienThoaiAdapter;
 import com.example.doan.adapter.SanPhamMoiAdapter;
 import com.example.doan.model.SanPhamMoi;

@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.doan.R;
+import com.example.doan.activity.BaseActivity;
 import com.example.doan.model.GioHang;
 import com.example.doan.model.SanPhamMoi;
 import com.example.doan.utils.Utils;

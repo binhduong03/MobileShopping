@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.doan.R;
+import com.example.doan.activity.BaseActivity;
 import com.example.doan.databinding.ActivityTrangCaNhanBinding;
 import com.example.doan.retrofit.ApiBanHang;
 import com.example.doan.utils.Utils;
@@ -20,7 +21,7 @@ import com.example.doan.utils.Utils;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
-public class TrangCaNhanActivity extends AppCompatActivity {
+public class TrangCaNhanActivity extends BaseActivity {
     ActivityTrangCaNhanBinding binding;
     ApiBanHang apiBanHang;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -32,8 +33,7 @@ public class TrangCaNhanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityTrangCaNhanBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
+        setContentLayoutt(binding.getRoot());
         Anhxa();
         ActionToolBar();
         getData();

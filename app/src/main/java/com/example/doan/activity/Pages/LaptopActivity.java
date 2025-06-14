@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doan.R;
+import com.example.doan.activity.BaseActivity;
 import com.example.doan.adapter.LaptopAdapter;
 import com.example.doan.model.SanPhamMoi;
 import com.example.doan.retrofit.ApiBanHang;
