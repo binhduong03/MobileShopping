@@ -1,24 +1,24 @@
 package com.example.doan.model;
 
 public class LienHe {
-    int lienhe_id;
+    int contact_id;
     int user_id;
     String message;
     int is_read;
 
-    public LienHe(int lienhe_id, int user_id, String message, int is_read) {
-        this.lienhe_id = lienhe_id;
+    public LienHe(int contact_id, int user_id, String message, int is_read) {
+        this.contact_id = contact_id;
         this.user_id = user_id;
         this.message = message;
         this.is_read = is_read;
     }
 
-    public int getLienhe_id() {
-        return lienhe_id;
+    public int getContact_id() {
+        return contact_id;
     }
 
-    public void setLienhe_id(int lienhe_id) {
-        this.lienhe_id = lienhe_id;
+    public void setContact_id(int contact_id) {
+        this.contact_id = contact_id;
     }
 
     public int getUser_id() {

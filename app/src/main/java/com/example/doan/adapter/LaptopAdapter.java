@@ -50,14 +50,14 @@ public class LaptopAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if(holder instanceof MyViewHolder){
             MyViewHolder myViewHolder = (MyViewHolder) holder;
             SanPhamMoi sanPham = array.get(position);
-            myViewHolder.tensp.setText(sanPham.getTensp());
+            myViewHolder.tensp.setText(sanPham.getName());
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            myViewHolder.giasp.setText("Giá: " + decimalFormat.format(Double.parseDouble(sanPham.getGiasp())) + "đ");
-            myViewHolder.mota.setText(sanPham.getMota());
-            if (sanPham.getHinhanh().contains("http")){
-                Glide.with(context).load(sanPham.getHinhanh()).into(myViewHolder.hinhanh);
+            myViewHolder.giasp.setText("Giá: " + decimalFormat.format(Double.parseDouble(sanPham.getPrice())) + "đ");
+            myViewHolder.mota.setText(sanPham.getDescription());
+            if (sanPham.getImage().contains("http")){
+                Glide.with(context).load(sanPham.getImage()).into(myViewHolder.hinhanh);
             }else {
-                String hinh = Utils.BASE_URL+"Admin/images/"+sanPham.getHinhanh();
+                String hinh = Utils.BASE_URL+"Admin/images/"+sanPham.getImage();
                 Glide.with(context).load(hinh).into(myViewHolder.hinhanh);
             }
 

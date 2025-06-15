@@ -1,53 +1,53 @@
 package com.example.doan.model;
 
 public class GioHang {
-    int idsp;
-    String tensp;
-    long giasp;
-    String hinhsp;
-    int soluong;
+    int product_id;
+    String name;
+    long price;
+    String image;
+    int quantity;
 
     public GioHang() {
 
     }
 
-    public int getIdsp() {
-        return idsp;
+    public int getProduct_id() {
+        return product_id;
     }
 
-    public void setIdsp(int idsp) {
-        this.idsp = idsp;
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
-    public String getTensp() {
-        return tensp;
+    public String getName() {
+        return name;
     }
 
-    public void setTensp(String tensp) {
-        this.tensp = tensp;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public long getGiasp() {
-        return giasp;
+    public long getPrice() {
+        return price;
     }
 
-    public void setGiasp(long giasp) {
-        this.giasp = giasp;
+    public void setPrice(long price) {
+        this.price = price;
     }
 
-    public String getHinhsp() {
-        return hinhsp;
+    public String getImage() {
+        return image;
     }
 
-    public void setHinhsp(String hinhsp) {
-        this.hinhsp = hinhsp;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public int getSoluong() {
-        return soluong;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

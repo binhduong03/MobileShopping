@@ -53,7 +53,7 @@ public class GioHangActivity extends BaseActivity {
     private void tinhTongtien(){
         tongtiensp = 0;
         for(int i = 0; i < Utils.mangmuahang.size(); i++){
-            tongtiensp = tongtiensp + (Utils.mangmuahang.get(i).getGiasp() * Utils.mangmuahang.get(i).getSoluong());
+            tongtiensp = tongtiensp + (Utils.mangmuahang.get(i).getPrice() * Utils.mangmuahang.get(i).getQuantity());
         }
 
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
@@ -91,7 +91,7 @@ public class GioHangActivity extends BaseActivity {
         });
         long tongtien = 0;
         for(int i = 0; i < Utils.manggiohang.size(); i++){
-            tongtien += Utils.manggiohang.get(i).getGiasp();
+            tongtien += Utils.manggiohang.get(i).getPrice();
         }
     }
     private void initView(){
