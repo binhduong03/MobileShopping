@@ -21,7 +21,7 @@ import retrofit2.http.Part;
 
 public interface ApiBanHang {
     //GET DATA
-    @GET("getloaisp.php")
+    @GET("all-menu.php")
     Observable<LoaiSpModel> getLoaiSp();
 
     @GET("getspmoi.php")
@@ -72,11 +72,11 @@ public interface ApiBanHang {
     @FormUrlEncoded
     Observable<UserModel> createOder(
             @Field("email") String email,
-            @Field("sdt") String sdt,
-            @Field("tongtien") String tongtien,
+            @Field("phone") String phone,
+            @Field("total_amount") String total_amount,
             @Field("user_id") int user_id,
-            @Field("diachi") String diachi,
-            @Field("soluong") int soluong,
+            @Field("address") String address,
+            @Field("quantity") int quantity,
             @Field("chitiet") String chitiet
     );
 
@@ -96,7 +96,7 @@ public interface ApiBanHang {
     @POST("Admin/SanPham/delete_sp.php")
     @FormUrlEncoded
     Observable<MessageModel> deleteSp(
-            @Field("sanphammoi_id") int sanphammoi_id
+            @Field("product_id") int product_id
     );
 
     @POST("Admin/SanPham/insert_sp.php")

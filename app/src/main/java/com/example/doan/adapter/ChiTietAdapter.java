@@ -44,13 +44,13 @@ public class ChiTietAdapter extends RecyclerView.Adapter<ChiTietAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Item item = itemList.get(position);
-        holder.txtTenspchitiet.setText(item.getTensanpham() + "");
-        holder.txtSoluongchitiet.setText("Số lượng: " + item.getSoluong());
-        Log.d("ChiTietAdapter", "Tên sản phẩm: " + itemList.get(position).getTensanpham());
-        if (item.getHinhanh().contains("http")){
-            Glide.with(context).load(item.getHinhanh()).into(holder.imageChitiet);
+        holder.txtTenspchitiet.setText(item.getName() + "");
+        holder.txtSoluongchitiet.setText("Số lượng: " + item.getQuantity());
+        Log.d("ChiTietAdapter", "Tên sản phẩm: " + itemList.get(position).getName());
+        if (item.getImage().contains("http")){
+            Glide.with(context).load(item.getImage()).into(holder.imageChitiet);
         } else {
-            String hinh = Utils.BASE_URL+"Admin/images/"+item.getHinhanh();
+            String hinh = Utils.BASE_URL+"Admin/images/"+item.getImage();
             Glide.with(context).load(hinh).into(holder.imageChitiet);
         }
 

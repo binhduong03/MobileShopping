@@ -317,7 +317,7 @@ public class MainActivity extends BaseActivity {
         } else {
             int totalItem = 0;
             for (int i = 0; i < Utils.manggiohang.size(); i++) {
-                totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
+                totalItem = totalItem + Utils.manggiohang.get(i).getQuantity();
             }
             badge.setText(String.valueOf(totalItem));
         }
@@ -343,7 +343,7 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         int totalItem = 0;
         for (int i = 0; i < Utils.manggiohang.size(); i++) {
-            totalItem = totalItem + Utils.manggiohang.get(i).getSoluong();
+            totalItem = totalItem + Utils.manggiohang.get(i).getQuantity();
         }
         badge.setText(String.valueOf(totalItem));
     }

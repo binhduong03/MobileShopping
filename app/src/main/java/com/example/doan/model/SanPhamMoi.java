@@ -3,58 +3,58 @@ package com.example.doan.model;
 import java.io.Serializable;
 
 public class SanPhamMoi implements Serializable {
-    private int sanphammoi_id;
-    private String tensp;
-    private String hinhanh;
-    private String giasp;
-    private String mota;
-    private int loai;
+    private int product_id;
+    private String name;
+    private String image;
+    private String price;
+    private String description;
+    private int type;
 
-    public int getSanphammoi_id() {
-        return sanphammoi_id;
+    public int getProduct_id() {
+        return product_id;
     }
 
-    public void setSanphammoi_id(int sanphammoi_id) {
-        this.sanphammoi_id = sanphammoi_id;
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
-    public String getTensp() {
-        return tensp;
+    public String getName() {
+        return name;
     }
 
-    public void setTensp(String tensp) {
-        this.tensp = tensp;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getHinhanh() {
-        return hinhanh;
+    public String getImage() {
+        return image;
     }
 
-    public void setHinhanh(String hinhanh) {
-        this.hinhanh = hinhanh;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getGiasp() {
-        return giasp;
+    public String getPrice() {
+        return price;
     }
 
-    public void setGiasp(String giasp) {
-        this.giasp = giasp;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public String getMota() {
-        return mota;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMota(String mota) {
-        this.mota = mota;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getLoai() {
-        return loai;
+    public int getType() {
+        return type;
     }
 
-    public void setLoai(int loai) {
-        this.loai = loai;
+    public void setType(int type) {
+        this.type = type;
     }
 }
