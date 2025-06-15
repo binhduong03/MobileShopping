@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="24dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <!-- Họ tên -->
+    <EditText
+        android:id="@+id/edtName"
+        android:hint="Họ tên"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_edittext"
+        android:paddingHorizontal="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Email -->
+    <EditText
+        android:id="@+id/edtEmail"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_edittext"
+        android:paddingHorizontal="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Số điện thoại -->
+    <EditText
+        android:id="@+id/edtPhone"
+        android:hint="Số điện thoại"
+        android:inputType="phone"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_edittext"
+        android:paddingHorizontal="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Địa chỉ -->
+    <EditText
+        android:id="@+id/edtAddress"
+        android:hint="Địa chỉ"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_edittext"
+        android:paddingHorizontal="12dp"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Nút gửi -->
+    <Button
+        android:id="@+id/btnSubmit"
+        android:text="Gửi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#3F51B5"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"/>
+</LinearLayout>

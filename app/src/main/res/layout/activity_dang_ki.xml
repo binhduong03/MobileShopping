@@ -67,7 +67,7 @@
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/username"
-            android:hint="UserName"
+            android:hint="Họ và tên"
             android:inputType="textPhonetic"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

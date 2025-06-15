@@ -18,16 +18,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".activity.Pages.ChiTietActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".activity.Pages.TrangCaNhanActivity"
-            android:exported="true" >
-
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.Pages.LienHeActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.Pages.SearchActivity"
             android:exported="false" />
@@ -37,15 +36,10 @@
         <activity
             android:name=".activity.Pages.ThanhToanActivity"
             android:exported="false" />
-        <activity
-            android:name=".activity.Admin.ThemSPActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.Admin.QuanLiActivity"
-            android:exported="false" />
+
         <activity
             android:name=".activity.SplashActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,12 +54,9 @@
             android:exported="true" />
         <activity
             android:name=".activity.DangNhapActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".activity.DangKiActivity"
-            android:exported="true" />
-        <activity
-            android:name=".activity.Pages.ChiTietActivity"
             android:exported="true" />
         <activity
             android:name=".activity.Pages.LaptopActivity"
