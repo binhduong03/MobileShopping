@@ -46,12 +46,12 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         GioHang giohang = gioHangList.get(position);
-        holder.item_Giohang_tensp.setText(giohang.getTensp());
-        holder.item_Giohang_soluong.setText(giohang.getSoluong() + " ");
-        Glide.with(context).load(giohang.getHinhsp()).into(holder.item_Giohang_image);
+        holder.item_Giohang_tensp.setText(giohang.getName());
+        holder.item_Giohang_soluong.setText(giohang.getQuantity() + " ");
+        Glide.with(context).load(giohang.getImage()).into(holder.item_Giohang_image);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.item_Giohang_gia.setText(decimalFormat.format((giohang.getGiasp())));
-        long gia = giohang.getSoluong() * giohang.getGiasp();
+        holder.item_Giohang_gia.setText(decimalFormat.format((giohang.getPrice())));
+        long gia = giohang.getQuantity() * giohang.getPrice();
         holder.item_Giohang_gia2.setText(decimalFormat.format(gia));
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -61,7 +61,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
                     EventBus.getDefault().postSticky(new TinhTongEvent());
                 }else{
                     for(int i = 0; i < Utils.mangmuahang.size(); i++){
-                        if(Utils.mangmuahang.get(i).getIdsp() == giohang.getIdsp()){
+                        if(Utils.mangmuahang.get(i).getProduct_id() == giohang.getProduct_id()){
                             Utils.mangmuahang.remove(i);
                             EventBus.getDefault().postSticky(new TinhTongEvent());
                         }
@@ -73,15 +73,15 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
             @Override
             public void onImageClick(View view, int pos, int giatri) {
                 if(giatri == 1){
-                    if(gioHangList.get(pos).getSoluong() > 1){
-                        int soLuongmoi = gioHangList.get(pos).getSoluong() - 1;
-                        gioHangList.get(pos).setSoluong(soLuongmoi);
+                    if(gioHangList.get(pos).getQuantity() > 1){
+                        int soLuongmoi = gioHangList.get(pos).getProduct_id() - 1;
+                        gioHangList.get(pos).setQuantity(soLuongmoi);
 
-                        holder.item_Giohang_soluong.setText(gioHangList.get(pos).getSoluong() + " ");
-                        long gia = gioHangList.get(pos).getSoluong() * gioHangList.get(pos).getGiasp();
+                        holder.item_Giohang_soluong.setText(gioHangList.get(pos).getQuantity() + " ");
+                        long gia = gioHangList.get(pos).getQuantity() * gioHangList.get(pos).getPrice();
                         holder.item_Giohang_gia2.setText(decimalFormat.format(gia));
                         EventBus.getDefault().postSticky(new TinhTongEvent());
-                    }else if(gioHangList.get(pos).getSoluong() == 1){
+                    }else if(gioHangList.get(pos).getQuantity() == 1){
                         AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext());
                         builder.setTitle("Thông báo");
                         builder.setMessage("Bạn có muốn xoá sản phẩm này khỏi giỏ hàng không?");
@@ -103,12 +103,12 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
 
                     }
                 }else if(giatri == 2){
-                    if(gioHangList.get(pos).getSoluong() < 11){
-                        int soLuongmoi = gioHangList.get(pos).getSoluong() + 1;
-                        gioHangList.get(pos).setSoluong(soLuongmoi);
+                    if(gioHangList.get(pos).getQuantity() < 11){
+                        int soLuongmoi = gioHangList.get(pos).getQuantity() + 1;
+                        gioHangList.get(pos).setQuantity(soLuongmoi);
                     }
-                    holder.item_Giohang_soluong.setText(gioHangList.get(pos).getSoluong() + " ");
-                    long gia = gioHangList.get(pos).getSoluong() * gioHangList.get(pos).getGiasp();
+                    holder.item_Giohang_soluong.setText(gioHangList.get(pos).getQuantity() + " ");
+                    long gia = gioHangList.get(pos).getQuantity() * gioHangList.get(pos).getPrice();
                     holder.item_Giohang_gia2.setText(decimalFormat.format(gia));
                     EventBus.getDefault().postSticky(new TinhTongEvent());
                 }

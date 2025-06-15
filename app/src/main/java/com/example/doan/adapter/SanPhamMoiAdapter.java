@@ -44,9 +44,9 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
     @Override
     public void onBindViewHolder(@NonNull SanPhamMoiAdapter.MyViewHolder holder, int position) {
         SanPhamMoi sanPhamMoi = array.get(position);
-        holder.txtten.setText(sanPhamMoi.getTensp());
+        holder.txtten.setText(sanPhamMoi.getName());
         try {
-            String giaStr = sanPhamMoi.getGiasp();
+            String giaStr = sanPhamMoi.getPrice();
             if (giaStr != null && !giaStr.isEmpty()) {
                 double gia = Double.parseDouble(giaStr);
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
@@ -58,10 +58,10 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
             holder.txtgia.setText("Giá: Không hợp lệ");
             e.printStackTrace(); // log lỗi để bạn dễ debug
         }
-        if (sanPhamMoi.getHinhanh().contains("http")){
-            Glide.with(context).load(sanPhamMoi.getHinhanh()).into(holder.imghinhanh);
+        if (sanPhamMoi.getImage().contains("http")){
+            Glide.with(context).load(sanPhamMoi.getImage()).into(holder.imghinhanh);
         }else {
-            String hinh = Utils.BASE_URL+"Admin/images/"+sanPhamMoi.getHinhanh();
+            String hinh = Utils.BASE_URL+"Admin/images/"+sanPhamMoi.getImage();
             Glide.with(context).load(hinh).into(holder.imghinhanh);
         }
 

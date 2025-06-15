@@ -4,57 +4,57 @@ import com.google.gson.annotations.SerializedName;
 
 public class Item {
 
-    @SerializedName("sanphammoi_id")
-    private int sanpham_id;
+    @SerializedName("product_id")
+    private int product_id;
 
-    @SerializedName("tensp")
-    private String tensanpham;
+    @SerializedName("name")
+    private String name;
 
-    @SerializedName("soluong")
-    private int soluong;
+    @SerializedName("quantity")
+    private int quantity;
 
-    @SerializedName("gia")
-    private String gia;
+    @SerializedName("price")
+    private String price;
 
-    String hinhanh;
+    String image;
 
-    public String getHinhanh() {
-        return hinhanh;
+    public int getProduct_id() {
+        return product_id;
     }
 
-    public void setHinhanh(String hinhanh) {
-        this.hinhanh = hinhanh;
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
-    public int getSanpham_id() {
-        return sanpham_id;
+    public String getName() {
+        return name;
     }
 
-    public void setSanpham_id(int sanpham_id) {
-        this.sanpham_id = sanpham_id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getTensanpham() {
-        return tensanpham;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setTensanpham(String tensanpham) {
-        this.tensanpham = tensanpham;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public int getSoluong() {
-        return soluong;
+    public String getPrice() {
+        return price;
     }
 
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public String getGia() {
-        return gia;
+    public String getImage() {
+        return image;
     }
 
-    public void setGia(String gia) {
-        this.gia = gia;
+    public void setImage(String image) {
+        this.image = image;
     }
 }

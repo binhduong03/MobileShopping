@@ -3,12 +3,20 @@ package com.example.doan.model;
 import java.util.List;
 
 public class DonHang {
-    int donhang_id;
+    int order_id;
     int user_id;
-    String diachi;
-    String sodienthoai;
-    String tongtien;
+    String address;
+    String phone;
+    String total_amount;
     List<Item> item;
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
 
     public int getUser_id() {
         return user_id;
@@ -18,36 +26,28 @@ public class DonHang {
         this.user_id = user_id;
     }
 
-    public int getDonhang_id() {
-        return donhang_id;
+    public String getAddress() {
+        return address;
     }
 
-    public void setDonhang_id(int donhang_id) {
-        this.donhang_id = donhang_id;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getDiachi() {
-        return diachi;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getSodienthoai() {
-        return sodienthoai;
+    public String getTotal_amount() {
+        return total_amount;
     }
 
-    public void setSodienthoai(String sodienthoai) {
-        this.sodienthoai = sodienthoai;
-    }
-
-    public String getTongtien() {
-        return tongtien;
-    }
-
-    public void setTongtien(String tongtien) {
-        this.tongtien = tongtien;
+    public void setTotal_amount(String total_amount) {
+        this.total_amount = total_amount;
     }
 
     public List<Item> getItem() {

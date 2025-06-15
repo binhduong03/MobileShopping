@@ -52,7 +52,7 @@ public class ThanhToanActivity extends BaseActivity {
     private void countItem(){
         totalItem = 0;
         for(int i = 0; i<Utils.mangmuahang.size(); i++){
-            totalItem = totalItem + Utils.mangmuahang.get(i).getSoluong();
+            totalItem = totalItem + Utils.mangmuahang.get(i).getQuantity();
         }
     }
 
