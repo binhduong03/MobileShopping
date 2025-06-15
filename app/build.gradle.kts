@@ -89,5 +89,6 @@ dependencies {
 
 
     //Momo
+    implementation("vn.momo.platform:mobile-sdk:1.0.9")
 
 }
