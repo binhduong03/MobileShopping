@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import com.example.doan.Interface.ItemClickListener;
 import com.example.doan.R;
 import com.example.doan.activity.Pages.ChiTietActivity;
-import com.example.doan.model.EventBus.SuaXoaEvent;
 import com.example.doan.model.SanPhamMoi;
 import com.example.doan.utils.Utils;
 
@@ -73,8 +72,6 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
                     intent.putExtra("chitiet", sanPhamMoi);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
-                } else {
-                    EventBus.getDefault().postSticky(new SuaXoaEvent(sanPhamMoi));
                 }
             }
         });
@@ -85,7 +82,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
         return array.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener, View.OnLongClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txtgia, txtten;
         ImageView imghinhanh;
         private ItemClickListener itemClickListener;
@@ -95,8 +92,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
             txtten = itemView.findViewById(R.id.itemsp_ten);
             imghinhanh = itemView.findViewById(R.id.itemsp_image);
             itemView.setOnClickListener(this);
-            itemView.setOnCreateContextMenuListener(this);
-            itemView.setOnLongClickListener(this);
+
         }
 
         public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -108,16 +104,5 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
             itemClickListener.onClick(view, getAdapterPosition(), false);
         }
 
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            menu.add(0,0,getAdapterPosition(),"Sửa");
-            menu.add(0,1,getAdapterPosition(),"Xóa");
-        }
-
-        @Override
-        public boolean onLongClick(View view) {
-            itemClickListener.onClick(view, getAdapterPosition(), true);
-            return false;
-        }
     }
 }
