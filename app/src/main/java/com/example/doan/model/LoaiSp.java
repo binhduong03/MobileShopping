@@ -1,38 +1,37 @@
 package com.example.doan.model;
 
 public class LoaiSp {
-    int sanpham_id;
-    String tensanpham;
-    String hinhanh;
+    int menu_id;
+    String name;
+    String image;
 
-    public LoaiSp( String hinhanh, String tensanpham) {
-
-        this.hinhanh = hinhanh;
-        this.tensanpham = tensanpham;
+    public LoaiSp(int menu_id, String name, String image) {
+        this.menu_id = menu_id;
+        this.name = name;
+        this.image = image;
     }
 
-    public int getSanpham_id() {
-        return sanpham_id;
+    public int getMenu_id() {
+        return menu_id;
     }
 
-    public void setSanpham_id(int sanpham_id) {
-        this.sanpham_id = sanpham_id;
+    public void setMenu_id(int menu_id) {
+        this.menu_id = menu_id;
     }
 
-    public String getTensanpham() {
-        return tensanpham;
+    public String getName() {
+        return name;
     }
 
-    public void setTensanpham(String tensanpham) {
-        this.tensanpham = tensanpham;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getHinhanh() {
-        return hinhanh;
+    public String getImage() {
+        return image;
     }
 
-    public void setHinhanh(String hinhanh) {
-        this.hinhanh = hinhanh;
+    public void setImage(String image) {
+        this.image = image;
     }
-
 }

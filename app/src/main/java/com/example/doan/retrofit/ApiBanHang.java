@@ -31,7 +31,7 @@ public interface ApiBanHang {
     @FormUrlEncoded
     Observable<SanPhamMoiModel> getDienThoai(
             @Field("page") int page,
-            @Field("loai") int loai
+            @Field("type") int type
     );
 
 
@@ -40,7 +40,7 @@ public interface ApiBanHang {
     @FormUrlEncoded
     Observable<SanPhamMoiModel> getLapTop(
             @Field("page") int page,
-            @Field("loai") int loai
+            @Field("type") int type
     );
 
     @POST("dangki.php")

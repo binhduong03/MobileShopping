@@ -101,7 +101,7 @@ public class QuanLiActivity extends AppCompatActivity {
     }
 
     private void xoaSanPham() {
-        compositeDisposable.add(apiBanHang.deleteSp(sanPhamSuaXoa.getSanphammoi_id())
+        compositeDisposable.add(apiBanHang.deleteSp(sanPhamSuaXoa.getProduct_id())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

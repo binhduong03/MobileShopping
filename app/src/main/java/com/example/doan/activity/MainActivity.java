@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -200,10 +201,6 @@ public class MainActivity extends BaseActivity {
                         startActivity(dangnhap);
                         finish();
                         break;
-                    case 7:
-                        Intent quanly = new Intent(getApplicationContext(), QuanLiActivity.class);
-                        startActivity(quanly);
-                        break;
 
                 }
             }
@@ -239,12 +236,15 @@ public class MainActivity extends BaseActivity {
                                 mangloaisp = loaiSpModel.getResult();
                                 if (Utils.user_current.getRole() != 1){
                                     for (int i = 0; i < mangloaisp.size(); i++) {
-                                        if (mangloaisp.get(i).getTensanpham().equalsIgnoreCase("Quản lý")) {
+                                        Log.d("DEBUG_LIST_SIZE", "Số lượng loại sản phẩm: " + mangloaisp.size());
+
+                                        if (mangloaisp.get(i).getName().equalsIgnoreCase("Quản lý")) {
                                             mangloaisp.remove(i);
                                             break;
                                         }
                                     }
                                 }
+                                Log.d("DEBUG_LIST_SIZE", "Sau khi lọc: " + mangloaisp.size());
                                 loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(), mangloaisp);
                                 listViewManHinhChinh.setAdapter(loaiSpAdapter);
                             }

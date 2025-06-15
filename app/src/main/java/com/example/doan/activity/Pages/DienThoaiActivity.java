@@ -44,7 +44,7 @@ public class DienThoaiActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentLayout(R.layout.activity_dien_thoai);
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
-        loai = getIntent().getIntExtra("loai", 1);
+        loai = getIntent().getIntExtra("loai", 0);
         AnhXa();
         ActionToolBar();
         getData(page);
