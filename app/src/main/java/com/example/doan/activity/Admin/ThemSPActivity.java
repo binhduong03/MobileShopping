@@ -68,11 +68,11 @@ public class ThemSPActivity extends AppCompatActivity {
             flag = true;
             binding.bntthem.setText("Sửa sản phẩm");
             //hiện thị dữ liệu
-            binding.tensp.setText(sanPhamSua.getTensp());
-            binding.giasp.setText(sanPhamSua.getGiasp());
-            binding.mota.setText(sanPhamSua.getMota());
-            binding.hinhanh.setText(sanPhamSua.getHinhanh());
-            binding.spinnerLoai.setSelection(sanPhamSua.getLoai());
+            binding.tensp.setText(sanPhamSua.getName());
+            binding.giasp.setText(sanPhamSua.getPrice());
+            binding.mota.setText(sanPhamSua.getDescription());
+            binding.hinhanh.setText(sanPhamSua.getImage());
+            binding.spinnerLoai.setSelection(sanPhamSua.getType());
         }
 
 
@@ -129,7 +129,7 @@ public class ThemSPActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(str_tensp) || TextUtils.isEmpty(str_giasp) || TextUtils.isEmpty(str_hinhanh) || TextUtils.isEmpty(str_mota) || loai==0){
             Toast.makeText(getApplicationContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_LONG).show();
         } else {
-            compositeDisposable.add(apiBanHang.updateSp(sanPhamSua.getSanphammoi_id(),str_tensp, str_giasp, str_hinhanh, str_mota, loai)
+            compositeDisposable.add(apiBanHang.updateSp(sanPhamSua.getProduct_id(),str_tensp, str_giasp, str_hinhanh, str_mota, loai)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
