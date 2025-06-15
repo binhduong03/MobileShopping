@@ -39,10 +39,19 @@ public class ThanhToanActivity extends BaseActivity {
     long tongtien;
     int totalItem;
 
+    private String amount = "10000";
+    private String fee = "0";
+    int environment = 0;//developer default
+    private String merchantName = "Thanh toán đơn hàng";
+    private String merchantCode = "SCB01";
+    private String merchantNameLabel = "BanHang";
+    private String description = "mua hàng online";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentLayout(R.layout.activity_thanh_toan);
+        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT); // AppMoMoLib.ENVIRONMENT.PRODUCTION
         initView();
         countItem();
         initControl();
@@ -109,6 +118,8 @@ public class ThanhToanActivity extends BaseActivity {
         txtEmail = findViewById(R.id.txtEmail);
         edtdiachi = findViewById(R.id.edtdiachi);
         btnDathang = findViewById(R.id.btnDathang);
+        btnmomo = findViewById(R.id.btnMomo);
+
     }
 
     @Override

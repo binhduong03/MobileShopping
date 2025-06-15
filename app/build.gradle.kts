@@ -89,6 +89,6 @@ dependencies {
 
 
     //Momo
-    implementation("vn.momo.platform:mobile-sdk:1.0.9")
+    implementation ("com.github.momo-wallet:mobile-sdk:1.0.7")
 
 }
