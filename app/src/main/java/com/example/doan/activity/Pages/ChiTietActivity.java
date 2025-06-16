@@ -97,6 +97,13 @@ public class ChiTietActivity extends BaseActivity {
         tensp.setText(sanPhamMoi.getName());
         mota.setText(sanPhamMoi.getDescription());
         Glide.with(getApplicationContext()).load(sanPhamMoi.getImage()).into(imghinhanh);
+        if (sanPhamMoi.getImage().contains("http")){
+            Glide.with(getApplicationContext()).load(sanPhamMoi.getImage()).into(imghinhanh);
+        } else {
+            String hinh = Utils.BASE_URL_HINHANH+"public/backend/assets/img/product/"+sanPhamMoi.getImage();
+            Glide.with(getApplicationContext()).load(hinh).into(imghinhanh);
+
+        }
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         giasp.setText("Giá: " + decimalFormat.format(Double.parseDouble(sanPhamMoi.getPrice())) + "đ");
         Integer[] so = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};

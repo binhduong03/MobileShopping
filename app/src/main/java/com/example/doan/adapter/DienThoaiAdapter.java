@@ -58,7 +58,7 @@ public class DienThoaiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             if (sanPham.getImage().contains("http")){
                 Glide.with(context).load(sanPham.getImage()).into(myViewHolder.hinhanh);
             }else {
-                String hinh = Utils.BASE_URL+"Admin/images/"+sanPham.getImage();
+                String hinh = Utils.BASE_URL_HINHANH+"public/backend/assets/img/product/"+sanPham.getImage();
                 Glide.with(context).load(hinh).into(myViewHolder.hinhanh);
             }
             myViewHolder.setItemClickListener(new ItemClickListener() {
