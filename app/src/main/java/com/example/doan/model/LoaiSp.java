@@ -4,11 +4,13 @@ public class LoaiSp {
     int menu_id;
     String name;
     String image;
+    int status;
 
-    public LoaiSp(int menu_id, String name, String image) {
+    public LoaiSp(int menu_id, String name, String image, int status) {
         this.menu_id = menu_id;
         this.name = name;
         this.image = image;
+        this.status = status;
     }
 
     public int getMenu_id() {
@@ -33,5 +35,13 @@ public class LoaiSp {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
