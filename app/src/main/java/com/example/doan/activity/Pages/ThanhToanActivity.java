@@ -51,7 +51,6 @@ public class ThanhToanActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentLayout(R.layout.activity_thanh_toan);
-        AppMoMoLib.getInstance().setEnvironment(AppMoMoLib.ENVIRONMENT.DEVELOPMENT); // AppMoMoLib.ENVIRONMENT.PRODUCTION
         initView();
         countItem();
         initControl();
@@ -118,7 +117,6 @@ public class ThanhToanActivity extends BaseActivity {
         txtEmail = findViewById(R.id.txtEmail);
         edtdiachi = findViewById(R.id.edtdiachi);
         btnDathang = findViewById(R.id.btnDathang);
-        btnmomo = findViewById(R.id.btnMomo);
 
     }
 

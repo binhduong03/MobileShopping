@@ -88,7 +88,4 @@ dependencies {
     implementation ("com.github.dhaval2404:imagepicker:2.1")
 
 
-    //Momo
-    implementation ("com.github.momo-wallet:mobile-sdk:1.0.7")
-
 }

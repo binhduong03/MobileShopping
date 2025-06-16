@@ -140,6 +140,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+    </androidx.appcompat.widget.AppCompatButton>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnMomo"
         android:layout_marginTop="25dp"
@@ -152,6 +153,5 @@
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </androidx.appcompat.widget.AppCompatButton>
 </androidx.constraintlayout.widget.ConstraintLayout>
