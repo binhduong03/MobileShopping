@@ -230,8 +230,13 @@ public class MainActivity extends BaseActivity {
                 .subscribe(
                         loaiSpModel -> {
                             if (loaiSpModel.isSuccess()){
-                                mangloaisp = loaiSpModel.getResult();
-
+                                List<LoaiSp> danhSachLoc = new ArrayList<>();
+                                for (LoaiSp item : loaiSpModel.getResult()) {
+                                    if (item.getStatus() == 1) {
+                                        danhSachLoc.add(item);
+                                    }
+                                }
+                                mangloaisp = danhSachLoc;
                                 loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(), mangloaisp);
                                 listViewManHinhChinh.setAdapter(loaiSpAdapter);
                             }

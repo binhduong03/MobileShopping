@@ -87,6 +87,7 @@ public class LaptopActivity extends BaseActivity {
                         sanPhamMoiModel -> {
                             if (sanPhamMoiModel.isSuccess()) {
                                 List<SanPhamMoi> result = sanPhamMoiModel.getResult();
+                                
                                 if (result.size() == 0) {
                                     isLastPage = true;
                                     return;
