@@ -74,7 +74,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.MyViewHo
             public void onImageClick(View view, int pos, int giatri) {
                 if(giatri == 1){
                     if(gioHangList.get(pos).getQuantity() > 1){
-                        int soLuongmoi = gioHangList.get(pos).getProduct_id() - 1;
+                        int soLuongmoi = gioHangList.get(pos).getQuantity() - 1;
                         gioHangList.get(pos).setQuantity(soLuongmoi);
 
                         holder.item_Giohang_soluong.setText(gioHangList.get(pos).getQuantity() + " ");

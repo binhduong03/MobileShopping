@@ -88,6 +88,4 @@ dependencies {
     implementation ("com.github.dhaval2404:imagepicker:2.1")
 
 
-    //Momo
-
 }
