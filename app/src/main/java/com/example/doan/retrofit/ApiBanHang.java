@@ -9,15 +9,10 @@ import com.example.doan.model.SanPhamMoiModel;
 import com.example.doan.model.UserModel;
 
 import io.reactivex.rxjava3.core.Observable;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 
 public interface ApiBanHang {
     //GET DATA
@@ -84,6 +79,13 @@ public interface ApiBanHang {
     @FormUrlEncoded
     Observable<DonHangModel> xemDonHang(
             @Field("user_id") int user_id
+    );
+
+    @POST("cancel-order")
+    @FormUrlEncoded
+    Observable<DonHangModel> huyDon(
+            @Field("order_id") int orderId,
+            @Field("status") int status
     );
 
     @POST("search")

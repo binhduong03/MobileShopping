@@ -5,10 +5,19 @@ import java.util.List;
 public class DonHang {
     int order_id;
     int user_id;
+    int status;
     String address;
     String phone;
     String total_amount;
     List<Item> item;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public int getOrder_id() {
         return order_id;
