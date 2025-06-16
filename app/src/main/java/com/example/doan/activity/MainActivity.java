@@ -10,7 +10,6 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,7 +21,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -33,7 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.doan.R;
-import com.example.doan.activity.Admin.QuanLiActivity;
 import com.example.doan.activity.Pages.DienThoaiActivity;
 import com.example.doan.activity.Pages.GioHangActivity;
 import com.example.doan.activity.Pages.LaptopActivity;
@@ -234,17 +231,7 @@ public class MainActivity extends BaseActivity {
                         loaiSpModel -> {
                             if (loaiSpModel.isSuccess()){
                                 mangloaisp = loaiSpModel.getResult();
-                                if (Utils.user_current.getRole() != 1){
-                                    for (int i = 0; i < mangloaisp.size(); i++) {
-                                        Log.d("DEBUG_LIST_SIZE", "Số lượng loại sản phẩm: " + mangloaisp.size());
 
-                                        if (mangloaisp.get(i).getName().equalsIgnoreCase("Quản lý")) {
-                                            mangloaisp.remove(i);
-                                            break;
-                                        }
-                                    }
-                                }
-                                Log.d("DEBUG_LIST_SIZE", "Sau khi lọc: " + mangloaisp.size());
                                 loaiSpAdapter = new LoaiSpAdapter(getApplicationContext(), mangloaisp);
                                 listViewManHinhChinh.setAdapter(loaiSpAdapter);
                             }

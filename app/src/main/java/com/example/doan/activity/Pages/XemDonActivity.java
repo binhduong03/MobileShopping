@@ -1,6 +1,7 @@
 package com.example.doan.activity.Pages;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -36,19 +37,31 @@ public class XemDonActivity extends BaseActivity {
         getOrder();
     }
 
-    private void getOrder(){
+    private void getOrder() {
+        if (Utils.user_current == null) {
+            Log.e("XemDon", "user_current is null!");
+            return;
+        }
+
         compositeDisposable.add(apiBanHang.xemDonHang(Utils.user_current.getUser_id())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         donHangModel -> {
-                            DonHangAdapter adapter = new DonHangAdapter(getApplicationContext(), donHangModel.getResult());
-                            reDonhang.setAdapter(adapter);
+                            if (donHangModel != null && donHangModel.isSuccess() && donHangModel.getResult() != null) {
+                                Log.d("XemDon", "Số đơn hàng: " + donHangModel.getResult().size());
+                                DonHangAdapter adapter = new DonHangAdapter(getApplicationContext(), donHangModel.getResult()); // đổi getApplicationContext()
+                                reDonhang.setAdapter(adapter);
+                            } else {
+                                Log.e("XemDon", "Dữ liệu đơn hàng không hợp lệ hoặc rỗng");
+                            }
                         }, throwable -> {
-
+                            Log.e("XemDon", "Lỗi gọi API: " + throwable.getMessage());
+                            throwable.printStackTrace();
                         }
                 ));
     }
+
 
     private void initToolbar(){
         setSupportActionBar(toolbar);

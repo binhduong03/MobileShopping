@@ -21,13 +21,13 @@ import retrofit2.http.Part;
 
 public interface ApiBanHang {
     //GET DATA
-    @GET("all-menu.php")
+    @GET("menu")
     Observable<LoaiSpModel> getLoaiSp();
 
-    @GET("getspmoi.php")
+    @GET("all-product")
     Observable<SanPhamMoiModel> getSpMoi();
 
-    @POST("chitiet.php")
+    @POST("products-by-type")
     @FormUrlEncoded
     Observable<SanPhamMoiModel> getDienThoai(
             @Field("page") int page,
@@ -36,14 +36,14 @@ public interface ApiBanHang {
 
 
     //POST DATA
-    @POST("chitiet.php")
+    @POST("products-by-type")
     @FormUrlEncoded
     Observable<SanPhamMoiModel> getLapTop(
             @Field("page") int page,
             @Field("type") int type
     );
 
-    @POST("dangki.php")
+    @POST("register")
     @FormUrlEncoded
     Observable<UserModel> dangKi(
             @Field("email") String email,
@@ -55,20 +55,20 @@ public interface ApiBanHang {
 
     );
 
-    @POST("dangnhap.php")
+    @POST("login-user")
     @FormUrlEncoded
     Observable<UserModel> dangNhap(
             @Field("email") String email,
             @Field("pass") String pass
     );
 
-    @POST("reset.php")
+    @POST("send-reset-mail")
     @FormUrlEncoded
     Observable<UserModel> resetPass(
             @Field("email") String email
     );
 
-    @POST("donhang.php")
+    @POST("place-order")
     @FormUrlEncoded
     Observable<UserModel> createOder(
             @Field("email") String email,
@@ -80,47 +80,20 @@ public interface ApiBanHang {
             @Field("chitiet") String chitiet
     );
 
-    @POST("xemdonhang.php")
+    @POST("history")
     @FormUrlEncoded
     Observable<DonHangModel> xemDonHang(
             @Field("user_id") int user_id
     );
 
-    @POST("timkiem.php")
+    @POST("search")
     @FormUrlEncoded
     Observable<SanPhamMoiModel> search(
             @Field("search") String search
     );
 
-    //Quản lý sản phẩm
-    @POST("Admin/SanPham/delete_sp.php")
-    @FormUrlEncoded
-    Observable<MessageModel> deleteSp(
-            @Field("product_id") int product_id
-    );
 
-    @POST("Admin/SanPham/insert_sp.php")
-    @FormUrlEncoded
-    Observable<MessageModel> insertSp(
-            @Field("tensp") String tensp,
-            @Field("giasp") String giasp,
-            @Field("hinhanh") String hinhanh,
-            @Field("mota") String mota,
-            @Field("loai") int loai
-    );
-
-    @POST("Admin/SanPham/update_sp.php")
-    @FormUrlEncoded
-    Observable<MessageModel> updateSp(
-            @Field("sanphammoi_id") int sanphammoi_id,
-            @Field("tensp") String tensp,
-            @Field("giasp") String giasp,
-            @Field("hinhanh") String hinhanh,
-            @Field("mota") String mota,
-            @Field("loai") int loai
-    );
-
-    @POST("updatetoken.php")
+    @POST("update-token")
     @FormUrlEncoded
     Observable<MessageModel> updateToken(
             @Field("user_id") int user_id,
@@ -128,17 +101,24 @@ public interface ApiBanHang {
 
     );
 
-    @Multipart
-    @POST("Admin/SanPham/upload.php")
-    Call<MessageModel> uploadFile(@Part MultipartBody.Part file);
-
-
-    @POST("LienHe/insert_lh.php")
+    @POST("contact")
     @FormUrlEncoded
     Observable<MessageModel> insertLH(
             @Field("user_id") int user_id,
             @Field("message") String message,
             @Field("is_read") int is_read
     );
+
+
+    @POST("update-user")
+    @FormUrlEncoded
+    Observable<MessageModel> updateUser(
+            @Field("user_id") int userId,
+            @Field("username") String username,
+            @Field("email") String email,
+            @Field("phone") String phone,
+            @Field("address") String address
+    );
+
 
 }
