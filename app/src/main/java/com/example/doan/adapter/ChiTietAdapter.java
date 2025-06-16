@@ -48,13 +48,15 @@ public class ChiTietAdapter extends RecyclerView.Adapter<ChiTietAdapter.MyViewHo
         holder.txtSoluongchitiet.setText("Số lượng: " + item.getQuantity());
         Log.d("ChiTietAdapter", "Tên sản phẩm: " + itemList.get(position).getName());
 
-        if (item.getImage() != null && item.getImage().contains("http")){
-            Glide.with(context).load(item.getImage()).into(holder.imageChitiet);
-        } else {
-            String hinh = Utils.BASE_URL+"Admin/images/"+item.getImage();
-            Glide.with(context).load(hinh).into(holder.imageChitiet);
-        }
+        if(item.getImage() != null){
+            if (item.getImage().contains("http")){
+                Glide.with(context).load(item.getImage()).into(holder.imageChitiet);
+            } else {
+                String hinh = Utils.BASE_URL_HINHANH+"public/backend/assets/img/product/"+item.getImage();
+                Glide.with(context).load(hinh).into(holder.imageChitiet);
 
+            }
+        }
     }
 
     @Override

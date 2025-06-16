@@ -1,6 +1,7 @@
 package com.example.doan.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.doan.R;
 import com.example.doan.model.LoaiSp;
+import com.example.doan.utils.Utils;
 
 import java.util.List;
 
@@ -45,20 +47,26 @@ public class LoaiSpAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
-        if (convertView == null){
-            viewHolder = new ViewHolder();
-            LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.item_sanpham,null);
-            viewHolder.texttensp = convertView.findViewById(R.id.item_tepsp);
-            viewHolder.imghinhanh = convertView.findViewById(R.id.item_image);
-            convertView.setTag(viewHolder);
-        }else {
-                viewHolder = (ViewHolder) convertView.getTag();
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder viewHolder = null;
+            if (convertView == null){
+                viewHolder = new ViewHolder();
+                LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = layoutInflater.inflate(R.layout.item_sanpham,null);
+                viewHolder.texttensp = convertView.findViewById(R.id.item_tepsp);
+                viewHolder.imghinhanh = convertView.findViewById(R.id.item_image);
+                convertView.setTag(viewHolder);
+            }else {
+                    viewHolder = (ViewHolder) convertView.getTag();
+            }
+            viewHolder.texttensp.setText(array.get(position).getName());
+            if(array.get(position).getImage().contains("http")){
+                Glide.with(context).load(array.get(position).getImage()).into(viewHolder.imghinhanh);
+            }else {
+                String hinh = Utils.BASE_URL_HINHANH+"public/backend/assets/img/menu/"+array.get(position).getImage();
+                Log.d("Xem đường dẫn", "getView: " + hinh + " vị trí " + position);
+            }
+
+            return convertView;
         }
-        viewHolder.texttensp.setText(array.get(position).getName());
-        Glide.with(context).load(array.get(position).getImage()).into(viewHolder.imghinhanh);
-        return convertView;
-    }
 }

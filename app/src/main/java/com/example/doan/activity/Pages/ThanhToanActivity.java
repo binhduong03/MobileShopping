@@ -95,9 +95,12 @@ public class ThanhToanActivity extends BaseActivity {
                     compositeDisposable.add(apiBanHang.createOder(str_email,str_sdt, String.valueOf(tongtien), str_user_id, str_diachi, totalItem, new Gson().toJson(Utils.mangmuahang)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                             userModel -> {
                                 Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+
                                 Utils.mangmuahang.clear();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
                                 startActivity(intent);
+
                                 finish();
                             },
                             throwable -> {

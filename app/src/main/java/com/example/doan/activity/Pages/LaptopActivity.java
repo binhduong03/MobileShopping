@@ -44,7 +44,7 @@ public class LaptopActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentLayout(R.layout.activity_laptop);
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
-        loai = getIntent().getIntExtra("loai", 1);
+        loai = getIntent().getIntExtra("type", 1);
         AnhXa();
         ActionToolBar();
         getData(page);
@@ -87,20 +87,26 @@ public class LaptopActivity extends BaseActivity {
                         sanPhamMoiModel -> {
                             if (sanPhamMoiModel.isSuccess()) {
                                 List<SanPhamMoi> result = sanPhamMoiModel.getResult();
-                                
-                                if (result.size() == 0) {
+
+                                List<SanPhamMoi> activeProducts = new ArrayList<>();
+                                for (SanPhamMoi sp : result) {
+                                    if (sp.getIs_active() == 1) {
+                                        activeProducts.add(sp);
+                                    }
+                                }
+                                if (activeProducts.size() == 0) {
                                     isLastPage = true;
                                     return;
                                 }
 
                                 if (adapterLt == null) {
-                                    sanPhamMoiList = result;
+                                    sanPhamMoiList = activeProducts;
                                     adapterLt = new LaptopAdapter(getApplicationContext(), sanPhamMoiList);
                                     recyclerView.setAdapter(adapterLt);
                                 } else {
                                     int vitri = sanPhamMoiList.size();
-                                    sanPhamMoiList.addAll(result);
-                                    adapterLt.notifyItemRangeInserted(vitri, result.size());
+                                    sanPhamMoiList.addAll(activeProducts);
+                                    adapterLt.notifyItemRangeInserted(vitri, activeProducts.size());
                                 }
 
                                 isLoading = false;

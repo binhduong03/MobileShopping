@@ -44,7 +44,7 @@ public class DienThoaiActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentLayout(R.layout.activity_dien_thoai);
         apiBanHang = RetrofitClient.getInstance(Utils.BASE_URL).create(ApiBanHang.class);
-        loai = getIntent().getIntExtra("loai", 0);
+        loai = getIntent().getIntExtra("type", 0);
         AnhXa();
         ActionToolBar();
         getData(page);
@@ -87,21 +87,26 @@ public class DienThoaiActivity extends BaseActivity {
                         sanPhamMoiModel -> {
                             if (sanPhamMoiModel.isSuccess()) {
                                 List<SanPhamMoi> result = sanPhamMoiModel.getResult();
-
+                                List<SanPhamMoi> activeProducts = new ArrayList<>();
+                                for (SanPhamMoi sp : result){
+                                    if(sp.getIs_active() == 1){
+                                        activeProducts.add(sp);
+                                    }
+                                }
                                 // Nếu không có thêm dữ liệu => đánh dấu là trang cuối
-                                if (result.size() == 0) {
+                                if (activeProducts.size() == 0) {
                                     isLastPage = true;
                                     return;
                                 }
 
                                 if (adapterDt == null) {
-                                    sanPhamMoiList = result;
+                                    sanPhamMoiList = activeProducts;
                                     adapterDt = new DienThoaiAdapter(getApplicationContext(), sanPhamMoiList);
                                     recyclerView.setAdapter(adapterDt);
                                 } else {
                                     int vitri = sanPhamMoiList.size();
-                                    sanPhamMoiList.addAll(result);
-                                    adapterDt.notifyItemRangeInserted(vitri, result.size());
+                                    sanPhamMoiList.addAll(activeProducts);
+                                    adapterDt.notifyItemRangeInserted(vitri, activeProducts.size());
                                 }
 
                                 isLoading = false;

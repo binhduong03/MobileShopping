@@ -10,6 +10,16 @@ public class SanPhamMoi implements Serializable {
     private String description;
     private int type;
 
+    private int is_active;
+
+    public int getIs_active() {
+        return is_active;
+    }
+
+    public void setIs_active(int is_active) {
+        this.is_active = is_active;
+    }
+
     public int getProduct_id() {
         return product_id;
     }

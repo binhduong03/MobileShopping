@@ -211,7 +211,13 @@ public class MainActivity extends BaseActivity {
                 .subscribe(
                         sanPhamMoiModel -> {
                             if (sanPhamMoiModel.isSuccess()){
-                                mangSpMoi = sanPhamMoiModel.getResult();
+                                List<SanPhamMoi> dsLoc = new ArrayList<>();
+                                for (SanPhamMoi item : sanPhamMoiModel.getResult()) {
+                                    if (item.getIs_active() == 1) {
+                                        dsLoc.add(item);
+                                    }
+                                }
+                                mangSpMoi = dsLoc;
                                 spMoiAdapter = new SanPhamMoiAdapter(getApplicationContext(),mangSpMoi);
                                 recyclerViewManHinhChinh.setAdapter(spMoiAdapter);
                             }

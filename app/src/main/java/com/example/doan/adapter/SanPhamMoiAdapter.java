@@ -60,7 +60,7 @@ public class SanPhamMoiAdapter extends RecyclerView.Adapter<SanPhamMoiAdapter.My
         if (sanPhamMoi.getImage().contains("http")){
             Glide.with(context).load(sanPhamMoi.getImage()).into(holder.imghinhanh);
         }else {
-            String hinh = Utils.BASE_URL+"Admin/images/"+sanPhamMoi.getImage();
+            String hinh = Utils.BASE_URL_HINHANH+"public/backend/assets/img/product/"+sanPhamMoi.getImage();
             Glide.with(context).load(hinh).into(holder.imghinhanh);
         }
 
